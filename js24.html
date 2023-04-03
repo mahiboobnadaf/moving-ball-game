@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            border:2px solid black;
+            width:600px;
+            height: 600px;
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+
+
+    </div>
+
+    <script>
+        window.onload=function(){
+            function makeBall({radius=100,x=20,y=20,color='red'}){
+                const div=document.createElement('div')
+                div.style.width=`${radius}px`
+                div.style.height=`${radius}px`
+                div.style.background=`${color}`
+                div.style.borderRadius='50%'
+                div.style.position='absolute'
+                div.style.left=`${x}px`
+                div.style.top=`${y}px`
+                // return {div}
+
+                return {x,y,radius,div,direction:[1,1],update(){
+                        this.x+=this.direction[0]
+                        this.y+=this.direction[1]
+                    },
+                render(){
+                        this.div.style.left=`${this.x}px`
+                        this.div.style.top=`${this.y}px`
+
+                    }
+                } 
+            }
+
+               let moving= setInterval(function(){
+                    ball.update()
+                    ball.render()
+                    
+                    if (ball.div.style.top=="500px"){
+                        clearInterval(moving)
+                    }
+                
+                },10)
+                
+
+                
+            const container=document.querySelector(".container")
+            const ball =makeBall({})
+            container.appendChild(ball.div)
+
+            // const ball2=makeBall({color:'pink',x:100,y:200})
+
+            // const ball3=makeBall({radius:150,color:'green',x:400})
+            
+            // container.appendChild(ball2.div)
+            // container.appendChild(ball3.div)
+
+        }
+    </script>
+    
+</body>
+</html>
+
+
+
